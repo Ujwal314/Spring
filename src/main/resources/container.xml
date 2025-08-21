@@ -1,0 +1,17 @@
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:util="http://www.springframework.org/schema/util"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+       http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    <bean id="studentObj1" class="org.example.dao.StudentDAO" scope="singleton" lazy-init="true"></bean>
+    <bean id="holidayObj1" class="org.example.controller.Holiday" scope="singleton" lazy-init="true">
+<!--        setter dependency injection-->
+        <property name="holidayName" value="Independence Day"></property>
+        <property name="holidayDate" value="15 August"></property>
+    </bean>
+    <bean id="holidayObj2" class="org.example.controller.Holiday" scope="singleton" lazy-init="true">
+<!--        constructor dependency injection-->
+        <constructor-arg value="Republic Day"></constructor-arg>
+        <constructor-arg value="26 January"></constructor-arg>
+    </bean>
+</beans>
