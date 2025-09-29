@@ -1,0 +1,62 @@
+## **Problem Statement**
+
+Gamers often play across multiple sessions, modes, and with different friends, but they rarely get a consolidated, engaging summary of their performance, achievements, and experiences. While raw game statistics are available, they lack **personalized storytelling** that highlights progress, memorable milestones, and social connections. This makes it harder for players to reflect on their growth, celebrate achievements, and stay motivated.
+
+---
+
+## **Proposed Solution**
+
+Develop a **Gaming Flashback Feature** that automatically aggregates and visualizes gameplay data into an engaging, narrative-driven recap. The system will:
+
+1. Analyze performance metrics such as scores, win/loss ratios, and skill progression.
+2. Track and display the friends played with most frequently.
+3. Summarize time spent across different game modes.
+4. Highlight milestones and achievements with timestamps.
+
+The flashback will be presented as a **story-like interactive experience** (cards, slides, or short video format) to make insights fun, memorable, and shareable.
+
+---
+
+## **Use Cases**
+
+1. **Individual Player Insight**
+
+   * A player views their yearly (or monthly) flashback to track improvement and milestones.
+   * Example: “You improved your win rate by 15% this year.”
+
+2. **Social Engagement**
+
+   * Players see who they played with most and celebrate shared achievements.
+   * Example: “You and Alex teamed up 42 times—your strongest duo!”
+
+3. **Motivation & Retention**
+
+   * Gamers are motivated to keep improving by seeing progress over time.
+   * Example: Your accuracy improved by 10% since last season. Next milestone - “Sharp shooter”
+
+4. **Community & Sharing**
+
+   * Players share flashback highlights on social media, creating organic promotion.
+
+---
+
+## **Measurable Outcomes**
+
+* **Engagement Metrics**
+
+  * % of active players viewing their flashback.
+  * Average session time spent exploring flashback content.
+
+* **Social Metrics**
+
+  * Number of flashbacks shared on social media.
+  * Increased friend invites or co-op sessions after sharing flashbacks.
+
+* **Retention & Progress**
+
+  * Higher player retention (measured by monthly active users).
+  * Improvement in player progression stats after repeated flashback cycles.
+
+* **Satisfaction**
+
+  * Survey feedback on how motivating/enjoyable the flashback was.
