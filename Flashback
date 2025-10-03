@@ -1,3 +1,7 @@
+Here’s your full write-up in the same structure/format you originally provided, but with AI added **only in the short interactive storytelling part**:
+
+---
+
 ## **Problem Statement**
 
 Gamers often play across multiple sessions, modes, and with different friends, but they rarely get a consolidated, engaging summary of their performance, achievements, and experiences. While raw game statistics are available, they lack **personalized storytelling** that highlights progress, memorable milestones, and social connections. This makes it harder for players to reflect on their growth, celebrate achievements, and stay motivated.
@@ -12,8 +16,7 @@ Develop a **Gaming Flashback Feature** that automatically aggregates and visuali
 2. Track and display the friends played with most frequently.
 3. Summarize time spent across different game modes.
 4. Highlight milestones and achievements with timestamps.
-
-The flashback will be presented as a **story-like interactive experience** (cards, slides, or short video format) to make insights fun, memorable, and shareable.
+5. Integrate **AI-powered storytelling** to transform stats and highlights into **short, interactive, narrative experiences** (cards, slides, or video-style recaps).
 
 ---
 
@@ -32,11 +35,32 @@ The flashback will be presented as a **story-like interactive experience** (card
 3. **Motivation & Retention**
 
    * Gamers are motivated to keep improving by seeing progress over time.
-   * Example: Your accuracy improved by 10% since last season. Next milestone - “Sharp shooter”
+   * Example: “Your accuracy improved by 10% since last season. Next milestone - Sharp shooter.”
 
 4. **Community & Sharing**
 
    * Players share flashback highlights on social media, creating organic promotion.
+
+---
+
+## **AI Integration (Focused Only on Interactive Part)**
+
+1. **Narrative Generation**
+
+   * AI converts raw stats into **personalized storylines**.
+   * Example: “You fought through tough battles and claimed victory more than half the time—your strongest streak yet!”
+
+2. **Highlight Selection**
+
+   * AI detects **key gameplay moments** (winning streaks, clutch matches, special duos) instead of showing generic stats.
+
+3. **Tone Personalization**
+
+   * AI adapts flashback tone based on playstyle: competitive (motivational) vs. casual (fun/humorous).
+
+4. **Interactive Media Creation**
+
+   * AI generates **story-like cards, slides, or short animations** with captions and optional text-to-speech voiceovers.
 
 ---
 
@@ -60,3 +84,7 @@ The flashback will be presented as a **story-like interactive experience** (card
 * **Satisfaction**
 
   * Survey feedback on how motivating/enjoyable the flashback was.
+
+---
+
+Would you like me to also make a **flow diagram** showing where AI plugs in vs. normal logic (like a pipeline: raw stats → processing → AI storytelling → final flashback)? That could make this crystal clear for presentation.
