@@ -1,0 +1,39 @@
+import requests
+from bs4 import BeautifulSoup
+import json
+
+def scrape_flipkart_products(url):
+    headers = {'User-Agent': 'Mozilla/5.0'}
+    response = requests.get(url, headers=headers)
+    soup = BeautifulSoup(response.content, 'html.parser')
+
+    products = []
+    # Simplified example: find all product containers
+    product_containers = soup.find_all('div', class_='_1AtVbE')
+
+    for container in product_containers:
+        try:
+            name = container.find('a', class_='s1Q9rs').text.strip()
+            price = container.find('div', class_='_30jeq3').text.strip()
+            rating = container.find('div', class_='_3LWZlK').text.strip()
+            
+            products.append({
+                'name': name,
+                'price': price,
+                'rating': rating
+            })
+        except AttributeError:
+            continue
+    
+    return products
+
+def save_to_json(data, filename='products.json'):
+    with open(filename, 'w') as f:
+        json.dump(data, f, indent=4)
+
+if __name__ == "__main__":
+    # Example URL (replace with actual search results page or category page)
+    url = "https://www.flipkart.com/search?q=laptops"
+    product_data = scrape_flipkart_products(url)
+    save_to_json(product_data)
+    print(f"Scraped {len(product_data)} products and saved to products.json")
