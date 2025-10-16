@@ -1,20 +1,356 @@
-WITH CustomerRunningTotal AS (
-    SELECT
-        customer_id,
-        order_date,
-        order_amount,
-        SUM(order_amount) OVER (PARTITION BY customer_id ORDER BY order_date) AS running_total
-    FROM
-        orders
-    WHERE
-        EXTRACT(YEAR FROM order_date) = 2023
-)
-SELECT
+create database ams;
+use ams;
+
+CREATE TABLE orders (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    order_amount DECIMAL(10, 2) NOT NULL
+);
+INSERT INTO orders (order_id, customer_id, order_date, order_amount) VALUES
+-- Customer 1
+(1, 1, '2023-01-05', 120.50),
+(2, 1, '2023-02-15', 250.00),
+(3, 1, '2023-04-10', 175.75),
+(4, 1, '2023-06-12', 310.20),
+(5, 1, '2023-09-02', 90.00),
+(6, 1, '2023-11-18', 130.50),
+(7, 1, '2024-01-10', 225.30),
+(8, 1, '2024-03-20', 180.00),
+(9, 1, '2024-05-15', 200.00),
+(10, 1, '2024-08-10', 260.75),
+
+-- Customer 2
+(11, 2, '2023-01-08', 500.00),
+(12, 2, '2023-03-25', 300.00),
+(13, 2, '2023-05-14', 250.00),
+(14, 2, '2023-08-02', 150.00),
+(15, 2, '2023-10-22', 200.00),
+(16, 2, '2024-01-01', 75.00),
+(17, 2, '2024-02-15', 225.00),
+(18, 2, '2024-04-18', 330.00),
+(19, 2, '2024-07-05', 280.00),
+(20, 2, '2024-09-25', 190.00),
+
+-- Customer 3
+(21, 3, '2023-01-10', 95.00),
+(22, 3, '2023-03-11', 120.00),
+(23, 3, '2023-05-15', 90.00),
+(24, 3, '2023-07-01', 130.00),
+(25, 3, '2023-09-18', 160.00),
+(26, 3, '2024-01-04', 200.00),
+(27, 3, '2024-03-12', 220.00),
+(28, 3, '2024-06-09', 280.00),
+(29, 3, '2024-08-02', 150.00),
+(30, 3, '2024-10-10', 250.00),
+
+-- Customer 4
+(31, 4, '2023-01-12', 300.00),
+(32, 4, '2023-03-10', 280.00),
+(33, 4, '2023-05-08', 250.00),
+(34, 4, '2023-07-05', 270.00),
+(35, 4, '2023-09-01', 150.00),
+(36, 4, '2024-02-11', 200.00),
+(37, 4, '2024-04-04', 180.00),
+(38, 4, '2024-06-19', 210.00),
+(39, 4, '2024-09-12', 240.00),
+(40, 4, '2024-11-03', 300.00),
+
+-- Customer 5
+(41, 5, '2023-02-06', 180.00),
+(42, 5, '2023-04-09', 190.00),
+(43, 5, '2023-06-13', 200.00),
+(44, 5, '2023-08-20', 250.00),
+(45, 5, '2023-10-17', 270.00),
+(46, 5, '2024-01-05', 210.00),
+(47, 5, '2024-03-02', 280.00),
+(48, 5, '2024-05-11', 300.00),
+(49, 5, '2024-07-09', 230.00),
+(50, 5, '2024-10-15', 320.00);
+
+SELECT 
     customer_id,
+    order_id,
     order_date,
-    running_total,
-    MIN(CASE WHEN running_total >= 1000 THEN order_date END) OVER (PARTITION BY customer_id) AS date_reached_1000
-FROM
-    CustomerRunningTotal
-ORDER BY
-    customer_id, order_date;
+    order_amount,
+    SUM(order_amount) OVER (
+        PARTITION BY customer_id 
+        ORDER BY order_date, order_id
+    ) AS running_total,
+    CASE 
+        WHEN SUM(order_amount) OVER (
+            PARTITION BY customer_id 
+            ORDER BY order_date, order_id
+        ) >= 1000
+        THEN 'Reached 1000'
+        ELSE 'Below 1000'
+    END AS status
+FROM orders
+WHERE YEAR(order_date) = 2023;
+
+with running as (
+select customer_id, order_date,
+sum(order_amount) over (
+partition by customer_id
+order by order_date, order_id
+) as running_total
+from orders
+where year(order_date) = 2023
+)
+select customer_id, min(order_date) as date_reached_1000
+from running
+where running_total >= 1000
+group by customer_id;
+
+CREATE TABLE order1 (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    total_amount DECIMAL(10, 2) NOT NULL
+);
+INSERT INTO order1 (order_id, customer_id, order_date, total_amount) VALUES
+-- Customer 1 (increasing frequency)
+(1, 1, '2023-01-01', 100.00),
+(2, 1, '2023-01-10', 150.00),
+(3, 1, '2023-01-18', 200.00),
+(4, 1, '2023-01-25', 250.00),
+
+-- Customer 2 (decreasing frequency)
+(5, 2, '2023-01-03', 120.00),
+(6, 2, '2023-01-15', 180.00),
+(7, 2, '2023-02-05', 220.00),
+(8, 2, '2023-03-01', 300.00),
+
+-- Customer 3 (mixed frequency)
+(9, 3, '2023-01-05', 90.00),
+(10, 3, '2023-01-20', 130.00),
+(11, 3, '2023-02-01', 160.00),
+(12, 3, '2023-02-10', 200.00),
+
+-- Customer 4 (increasing frequency)
+(13, 4, '2023-01-02', 50.00),
+(14, 4, '2023-01-12', 75.00),
+(15, 4, '2023-01-18', 100.00),
+(16, 4, '2023-01-22', 120.00),
+
+-- Customer 5 (decreasing frequency)
+(17, 5, '2023-01-01', 200.00),
+(18, 5, '2023-01-20', 220.00),
+(19, 5, '2023-02-15', 250.00),
+(20, 5, '2023-03-20', 300.00);
+
+-- WITH diffs AS (
+--     SELECT
+--         customer_id,
+--         order_date,
+--         LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date) AS prev_order_date,
+--         DATEDIFF(order_date, LAG(order_date) OVER (PARTITION BY customer_id ORDER BY order_date)) AS days_diff
+--     FROM order1
+-- ),
+-- avg_days AS (
+--     SELECT
+--         customer_id,
+--         AVG(days_diff) AS avg_days_between_orders
+--     FROM diffs
+--     WHERE days_diff IS NOT NULL
+--     GROUP BY customer_id
+-- ),
+-- trend AS (
+--     SELECT
+--         customer_id,
+--         CASE
+--             WHEN COUNT(*) > 1 AND MAX(days_diff) > MIN(days_diff) THEN 'Increasing Frequency'
+--             ELSE 'Not Increasing'
+--         END AS purchase_trend
+--     FROM diffs
+--     WHERE days_diff IS NOT NULL
+--     GROUP BY customer_id
+-- )
+-- SELECT a.customer_id, a.avg_days_between_orders, t.purchase_trend
+-- FROM avg_days a
+-- JOIN trend t ON a.customer_id = t.customer_id;
+
+with diffs as (
+select customer_id, order_date,
+lag(order_date) over (partition by customer_id order by order_date) as prev_order_date,
+datediff(order_date, lag(order_date) over (partition by customer_id order by order_date)) as days_diff
+from order1
+),
+diffs_clean as (
+select customer_id, order_date, days_diff
+from diffs
+where days_diff is not null
+),
+trend_calc as (
+select customer_id, order_date, days_diff,
+lag(days_diff) over (partition by customer_id order by order_date) as prev_days_diff,
+case
+	when lag(days_diff) over (partition by customer_id order by order_date) is null 
+    then 0
+	when days_diff < lag(days_diff) over (partition by customer_id order by order_date) 
+    then -1
+    when days_diff > lag(days_diff) over (partition by customer_id order by order_date) 
+    then 1
+	else 0
+end as step_sign
+from diffs_clean
+),
+trend_agg as (
+select customer_id, sum(step_sign) as trend_score, count(*) as steps_count
+from trend_calc
+group by customer_id
+),
+avg_days as (
+select customer_id, avg(days_diff) as avg_days_between_orders
+from diffs where days_diff is not null
+group by customer_id
+)
+select a.customer_id, a.avg_days_between_orders,
+case
+	when t.steps_count = 0 
+	then 'insufficient data'
+	when t.trend_score < 0 
+	then 'increasing frequency'
+	when t.trend_score > 0 
+	then 'decreasing frequency'
+	else 'stable frequency'
+end as purchase_trend
+from avg_days a
+join trend_agg t on a.customer_id = t.customer_id;
+
+-- Products table
+CREATE TABLE products (
+    product_id INT PRIMARY KEY AUTO_INCREMENT,
+    name VARCHAR(255) NOT NULL,
+    category VARCHAR(100),
+    subcategory VARCHAR(100),
+    price DECIMAL(10, 2) NOT NULL
+);
+
+-- Orders table
+CREATE TABLE orders2 (
+    order_id INT PRIMARY KEY AUTO_INCREMENT,
+    customer_id INT NOT NULL,
+    order_date DATE NOT NULL,
+    status VARCHAR(50) NOT NULL
+);
+
+-- Order_items table
+CREATE TABLE order_items (
+    order_item_id INT PRIMARY KEY AUTO_INCREMENT,
+    order_id INT NOT NULL,
+    product_id INT NOT NULL,
+    quantity INT NOT NULL,
+    unit_price DECIMAL(10, 2) NOT NULL,
+    CONSTRAINT fk_order FOREIGN KEY (order_id) REFERENCES orders(order_id),
+    CONSTRAINT fk_product FOREIGN KEY (product_id) REFERENCES products(product_id)
+);
+
+INSERT INTO products (name, category, subcategory, price) VALUES
+('Laptop Pro X', 'Electronics', 'Laptops', 1500.00),
+('Smartphone A1', 'Electronics', 'Mobile Phones', 800.00),
+('Wireless Mouse', 'Electronics', 'Accessories', 25.00),
+('Office Chair', 'Furniture', 'Chairs', 120.00),
+('Desk Lamp', 'Furniture', 'Lighting', 45.00),
+('Running Shoes', 'Apparel', 'Footwear', 90.00),
+('T-shirt', 'Apparel', 'Clothing', 20.00),
+('Coffee Maker', 'Appliances', 'Kitchen', 75.00),
+('Blender', 'Appliances', 'Kitchen', 60.00),
+('Notebook', 'Stationery', 'Office Supplies', 5.00);
+
+INSERT INTO orders2 (customer_id, order_date, status) VALUES
+(1, '2024-01-05', 'Completed'),
+(2, '2024-01-10', 'Completed'),
+(1, '2024-02-15', 'Pending'),
+(3, '2024-03-01', 'Completed'),
+(2, '2024-03-05', 'Completed'),
+(4, '2024-03-10', 'Cancelled'),
+(1, '2024-04-12', 'Completed'),
+(5, '2024-04-15', 'Completed'),
+(3, '2024-04-20', 'Pending'),
+(4, '2024-05-05', 'Completed');
+
+INSERT INTO order_items (order_id, product_id, quantity, unit_price) VALUES
+-- Order 1
+(11, 1, 1, 1500.00),
+(11, 3, 2, 25.00),
+
+-- Order 2
+(12, 2, 1, 800.00),
+(12, 6, 1, 90.00),
+
+-- Order 3
+(13, 4, 1, 120.00),
+(13, 5, 1, 45.00),
+
+-- Order 4
+(14, 1, 1, 1500.00),
+(14, 7, 3, 20.00),
+
+-- Order 5
+(15, 8, 1, 75.00),
+(15, 9, 1, 60.00),
+
+-- Order 6
+(16, 10, 5, 5.00),
+
+-- Order 7
+(17, 2, 2, 800.00),
+(17, 3, 1, 25.00),
+
+-- Order 8
+(18, 6, 2, 90.00),
+(18, 7, 2, 20.00),
+
+-- Order 9
+(19, 1, 1, 1500.00),
+(19, 5, 1, 45.00),
+
+-- Order 10
+(20, 4, 1, 120.00),
+(20, 9, 1, 60.00);
+
+WITH revenue_data AS (
+    SELECT 
+        p.category,
+        p.subcategory,
+        YEAR(o.order_date) AS order_year,
+        SUM(oi.quantity * oi.unit_price) AS revenue
+    FROM order_items oi
+    JOIN products p ON oi.product_id = p.product_id
+    JOIN orders2 o ON oi.order_id = o.order_id
+    WHERE o.status = 'Completed'
+    GROUP BY p.category, p.subcategory, YEAR(o.order_date)
+),
+ranked_subcategories AS (
+    SELECT
+        category,
+        subcategory,
+        order_year,
+        revenue,
+        RANK() OVER (PARTITION BY category, order_year ORDER BY revenue DESC) AS rank_in_category
+    FROM revenue_data
+),
+yoy_growth AS (
+    SELECT
+        r1.category,
+        r1.subcategory,
+        r1.order_year,
+        r1.revenue,
+        r1.rank_in_category,
+        ((r1.revenue - COALESCE(r2.revenue,0)) / NULLIF(COALESCE(r2.revenue,0),1)) * 100 AS yoy_growth_percent
+    FROM ranked_subcategories r1
+    LEFT JOIN ranked_subcategories r2
+        ON r1.category = r2.category
+        AND r1.subcategory = r2.subcategory
+        AND r1.order_year = r2.order_year + 1
+)
+SELECT 
+    category,
+    subcategory,
+    order_year,
+    revenue,
+    yoy_growth_percent
+FROM yoy_growth
+WHERE rank_in_category = 1
+ORDER BY category, order_year;
