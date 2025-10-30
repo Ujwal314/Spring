@@ -1,0 +1,26 @@
+"profile_id";"user_id";"age";"height";"weight";"salary_package";"job_location";"education";"occupation";"mangalik";"disability";"disablity_type";"blood_group";"rashi_id";"nakshatra_id";"gotra_id";"paada";"caste_id";"religion_id";"gender";"marital_status";"address_id";"family_id"
+1;1;21;185.0;65.0;750000.0;"Banglore";"B.Tech in CS-Ai ";"Data Platform Engineer";0;0;"";"A+";1;1;2;2;6;1;"1";"Single";0;0
+2;2;21;185.0;65.0;750000.0;"Banglore";"B.Tech in CS-Ai ";"Data Platform Engineer";0;0;"";"A+";4;8;2;2;6;1;"0";"Single";0;0
+3;4;22;5.7;45.0;700000.0;"Banglore";"B.Tech in Computers";"Software Engineer";0;1;"";"O+";1;1;2;1;3;2;"1";"Divorced";0;0
+4;8;22;160.0;50.0;700000.0;"Bengalore";"BE";"Software Engineer";0;0;"";"B+";2;17;4;2;3;2;"1";"Single";0;0
+5;10;21;140.0;44.0;700.0;"Bengalore";"BE";"Software Engineer";1;0;"";"B+";12;18;2;2;15;15;"1";"Single";0;0
+126;11;38;5.9;75.0;70000.0;"New York";"Bachelors";"Software Engineer";1;0;"";"O+";1;2;1;1;5;4;"1";"Single";0;0
+127;12;35;5.6;65.0;80000.0;"Los Angeles";"Masters";"Data Scientist";0;0;"";"A+";2;4;2;1;7;5;"0";"Married";0;0
+128;13;42;5.8;85.0;120000.0;"San Francisco";"PhD";"Project Manager";1;0;"";"B+";3;6;3;1;8;6;"1";"Single";0;0
+129;14;30;5.7;55.0;90000.0;"Chicago";"Bachelors";"Product Designer";1;0;"";"AB+";4;8;4;1;6;8;"0";"Single";0;0
+130;15;33;6.0;95.0;95000.0;"Miami";"Masters";"Business Analyst";0;1;"Visual Impairment";"O-";5;10;5;1;4;7;"1";"Married";0;0
+131;16;28;5.4;60.0;75000.0;"Dallas";"Bachelors";"Marketing Manager";1;0;"";"B-";6;13;6;1;10;9;"0";"Single";0;0
+132;17;37;5.8;72.0;65000.0;"Seattle";"Masters";"HR Manager";0;0;"";"O+";7;15;7;1;15;10;"1";"Married";0;0
+133;18;32;6.1;90.0;105000.0;"Boston";"PhD";"Civil Engineer";1;0;"";"AB+";8;17;1;1;12;13;"0";"Single";0;0
+134;19;29;5.5;58.0;68000.0;"Denver";"Bachelors";"Software Tester";0;0;"";"A-";9;19;2;1;9;14;"1";"Single";0;0
+135;20;40;5.9;80.0;110000.0;"Phoenix";"Masters";"UX/UI Designer";1;0;"";"O-";10;22;3;1;14;12;"0";"Married";0;0
+136;21;31;5.7;70.0;75000.0;"Washington";"Bachelors";"IT Consultant";0;0;"";"B+";11;24;4;1;17;16;"1";"Married";0;0
+137;22;26;5.5;50.0;55000.0;"Portland";"Bachelors";"Web Developer";0;0;"";"A+";12;26;5;1;5;17;"1";"Single";0;0
+138;23;28;5.9;77.0;82000.0;"Austin";"Masters";"Electrical Engineer";1;0;"";"O+";1;3;6;1;11;15;"0";"Single";0;0
+139;24;36;5.8;70.0;90000.0;"Atlanta";"PhD";"Research Scientist";0;1;"Hearing Impairment";"B-";2;5;7;1;6;18;"1";"Married";0;0
+140;25;33;5.6;68.0;72000.0;"Houston";"Masters";"Software Developer";0;0;"";"O-";3;7;1;1;13;3;"1";"Single";0;0
+141;26;41;6.0;88.0;95000.0;"San Diego";"Bachelors";"Project Coordinator";1;0;"";"AB+";4;9;2;1;19;4;"0";"Single";0;0
+142;27;34;5.7;75.0;80000.0;"Sacramento";"Bachelors";"Business Analyst";0;0;"";"A+";5;11;3;1;4;5;"1";"Single";0;0
+143;28;27;5.5;60.0;65000.0;"Las Vegas";"Bachelors";"Marketing Analyst";1;0;"";"B-";6;14;4;1;8;2;"0";"Single";0;0
+144;29;32;6.2;80.0;110000.0;"Minneapolis";"PhD";"Data Analyst";0;0;"";"O+";7;16;5;1;22;1;"1";"Married";0;0
+145;30;39;5.8;85.0;95000.0;"Indianapolis";"Masters";"Financial Analyst";1;0;"";"AB-";8;18;6;1;2;6;"0";"Single";0;0
